@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT UI Mockup Prompt Builder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode">
+    <div class="app-container">
+        <div class="navbar">
+            <div class="logo">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>UI Prompt Builder</span>
+            </div>
+            <div class="actions">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="container">
+            <header>
+                <div class="header-content">
+                    <div>
+                        <h1>Mobile UI Mockup Prompt Builder</h1>
+                        <p class="subtitle">Generate custom prompts for AI-powered mobile UI mockups</p>
+                    </div>
+                </div>
+            </header>
+
+            <div class="main-content">
+                <!-- Left column - Form inputs -->
+                <div class="input-column">
+                    <!-- General Info Section -->
+                    <section class="card card-clickable">
+                        <div class="card-header">
+                            <h2><i class="fas fa-info-circle"></i> General Information</h2>
+                            <div class="card-toggle"><i class="fas fa-chevron-up"></i></div>
+                        </div>
+                        
+                        <div class="card-content">
+                            <div class="form-group">
+                                <label for="appName">App Name</label>
+                                <input type="text" id="appName" placeholder="Enter your app name (e.g. Mindful)" autofocus>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Target Age Range</label>
+                                <div class="age-range">
+                                    <input type="number" id="ageRangeMin" value="18" min="1" max="120" aria-label="Minimum age">
+                                    <span>to</span>
+                                    <input type="number" id="ageRangeMax" value="35" min="1" max="120" aria-label="Maximum age">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="audienceDesc">Audience Description</label>
+                                <textarea id="audienceDesc" placeholder="Describe your target audience (e.g., Busy professionals who want to meditate during breaks)" rows="3"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="appLogo">App Logo URL <span class="optional">(optional)</span></label>
+                                <input type="text" id="appLogo" placeholder="Enter URL to your logo image">
+                                <p class="helper-text">Logo will be included in the prompt if provided</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="deviceType">Device Type</label>
+                                <select id="deviceType">
+                                    <optgroup label="Apple">
+                                        <option value="iphone15Pro" selected>iPhone 15 Pro (1179 x 2556 px)</option>
+                                        <option value="iphone15ProMax">iPhone 15 Pro Max (1290 x 2796 px)</option>
+                                        <option value="iphone15">iPhone 15 (1179 x 2556 px)</option>
+                                        <option value="iphone14Pro">iPhone 14 Pro (1179 x 2556 px)</option>
+                                        <option value="iphone13-15">iPhone 13 (1170 x 2532 px)</option>
+                                        <option value="iphoneSE">iPhone SE (750 x 1334 px)</option>
+                                    </optgroup>
+                                    <optgroup label="Android - Samsung">
+                                        <option value="galaxyS23">Galaxy S23 (1080 x 2340 px)</option>
+                                        <option value="galaxyS23Ultra">Galaxy S23 Ultra (1440 x 3088 px)</option>
+                                        <option value="galaxyS24">Galaxy S24 (1080 x 2340 px)</option>
+                                        <option value="galaxyS24Ultra">Galaxy S24 Ultra (1440 x 3120 px)</option>
+                                        <option value="galaxyA54">Galaxy A54 (1080 x 2340 px)</option>
+                                        <option value="galaxyZFlip">Galaxy Z Flip 5 (1080 x 2640 px)</option>
+                                        <option value="galaxyZFold">Galaxy Z Fold 5 (1812 x 2176 px) - Unfolded</option>
+                                    </optgroup>
+                                    <optgroup label="Android - Google">
+                                        <option value="pixel7">Google Pixel 7 (1080 x 2400 px)</option>
+                                        <option value="pixel7Pro">Google Pixel 7 Pro (1440 x 3120 px)</option>
+                                        <option value="pixel8">Google Pixel 8 (1080 x 2400 px)</option>
+                                        <option value="pixel8Pro">Google Pixel 8 Pro (1344 x 2992 px)</option>
+                                    </optgroup>
+                                    <optgroup label="Other Popular Android">
+                                        <option value="oneplus12">OnePlus 12 (1440 x 3168 px)</option>
+                                        <option value="xiaomi14">Xiaomi 14 (1200 x 2670 px)</option>
+                                        <option value="xiaomi14Pro">Xiaomi 14 Pro (1440 x 3200 px)</option>
+                                        <option value="motorolaEdge40">Motorola Edge 40 (1080 x 2400 px)</option>
+                                        <option value="nothing2">Nothing Phone 2 (1080 x 2412 px)</option>
+                                    </optgroup>
+                                    <optgroup label="Custom">
+                                        <option value="custom">Custom Size</option>
+                                    </optgroup>
+                                </select>
+                                <div id="customSizeContainer" class="custom-size-container hidden">
+                                    <div class="custom-size-inputs">
+                                        <div>
+                                            <label for="customWidth">Width (px)</label>
+                                            <input type="number" id="customWidth" min="320" max="3000" value="1170">
+                                        </div>
+                                        <div>
+                                            <label for="customHeight">Height (px)</label>
+                                            <input type="number" id="customHeight" min="480" max="5000" value="2532">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- UI Style Section -->
+                    <section class="card card-clickable">
+                        <div class="card-header">
+                            <h2><i class="fas fa-palette"></i> UI/UX Style</h2>
+                            <div class="card-toggle"><i class="fas fa-chevron-up"></i></div>
+                        </div>
+                        
+                        <div class="card-content">
+                            <p class="section-desc">Select a visual style for your interface</p>
+                            
+                            <div class="tags-container style-tags" id="style-tags">
+                                <div class="tag-item" data-value="Minimal">
+                                    <i class="fas fa-minus"></i> Minimal
+                                </div>
+                                <div class="tag-item" data-value="Bold & Colorful">
+                                    <i class="fas fa-paint-brush"></i> Bold & Colorful
+                                </div>
+                                <div class="tag-item" data-value="Futuristic">
+                                    <i class="fas fa-space-shuttle"></i> Futuristic
+                                </div>
+                                <div class="tag-item selected" data-value="Dark Mode">
+                                    <i class="fas fa-moon"></i> Dark Mode
+                                </div>
+                                <div class="tag-item" data-value="Skeuomorphism">
+                                    <i class="fas fa-cube"></i> Skeuomorphism
+                                </div>
+                                <div class="tag-item" data-value="Flat Design">
+                                    <i class="fas fa-square"></i> Flat Design
+                                </div>
+                                <div class="tag-item" data-value="Neumorphism">
+                                    <i class="fas fa-adjust"></i> Neumorphism
+                                </div>
+                                <div class="tag-item" data-value="Retro">
+                                    <i class="fas fa-gamepad"></i> Retro / Vintage
+                                </div>
+                                <div class="tag-item" data-value="Professional">
+                                    <i class="fas fa-briefcase"></i> Professional
+                                </div>
+                                <div class="tag-item" data-value="iOS-style">
+                                    <i class="fab fa-apple"></i> iOS-style
+                                </div>
+                                <div class="tag-item" data-value="Material Design">
+                                    <i class="fab fa-android"></i> Material Design
+                                </div>
+                            </div>
+
+                            <div class="form-group mt-4">
+                                <label for="customStyle">Custom Style</label>
+                                <div class="custom-field-add">
+                                    <input type="text" id="customStyle" placeholder="Describe your own style">
+                                    <button id="addCustomStyle" class="btn-add">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- App Category Section -->
+                    <section class="card card-clickable">
+                        <div class="card-header">
+                            <h2><i class="fas fa-tags"></i> App Category</h2>
+                            <div class="card-toggle"><i class="fas fa-chevron-up"></i></div>
+                        </div>
+                        
+                        <div class="card-content">
+                            <p class="section-desc">Select multiple categories that apply to your app</p>
+                            
+                            <div class="tags-container" id="category-tags">
+                                <div class="tag-item" data-value="Productivity">
+                                    <i class="fas fa-briefcase"></i> Productivity
+                                </div>
+                                <div class="tag-item" data-value="Fitness">
+                                    <i class="fas fa-dumbbell"></i> Fitness
+                                </div>
+                                <div class="tag-item" data-value="Finance">
+                                    <i class="fas fa-coins"></i> Finance
+                                </div>
+                                <div class="tag-item selected" data-value="Social">
+                                    <i class="fas fa-users"></i> Social
+                                </div>
+                                <div class="tag-item" data-value="Education">
+                                    <i class="fas fa-graduation-cap"></i> Education
+                                </div>
+                                <div class="tag-item" data-value="Entertainment">
+                                    <i class="fas fa-film"></i> Entertainment
+                                </div>
+                                <div class="tag-item" data-value="Health">
+                                    <i class="fas fa-heart"></i> Health
+                                </div>
+                                <div class="tag-item" data-value="Travel">
+                                    <i class="fas fa-plane"></i> Travel
+                                </div>
+                                <div class="tag-item" data-value="Food & Drink">
+                                    <i class="fas fa-utensils"></i> Food & Drink
+                                </div>
+                                <div class="tag-item" data-value="Shopping">
+                                    <i class="fas fa-shopping-cart"></i> Shopping
+                                </div>
+                                <div class="tag-item" data-value="Utilities">
+                                    <i class="fas fa-tools"></i> Utilities
+                                </div>
+                                <div class="tag-item" data-value="Lifestyle">
+                                    <i class="fas fa-spa"></i> Lifestyle
+                                </div>
+                                <div class="tag-item" data-value="Business">
+                                    <i class="fas fa-chart-line"></i> Business
+                                </div>
+                                <div class="tag-item" data-value="Music">
+                                    <i class="fas fa-music"></i> Music
+                                </div>
+                                <div class="tag-item" data-value="Photography">
+                                    <i class="fas fa-camera"></i> Photography
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Tone of Voice Section -->
+                    <section class="card card-clickable">
+                        <div class="card-header">
+                            <h2><i class="fas fa-comment-dots"></i> Tone of Voice</h2>
+                            <div class="card-toggle"><i class="fas fa-chevron-up"></i></div>
+                        </div>
+                        
+                        <div class="card-content">
+                            <p class="section-desc">Select multiple tones for your app's copy</p>
+                            
+                            <div class="tags-container" id="tone-tags">
+                                <div class="tag-item selected" data-value="Friendly">
+                                    <i class="fas fa-smile"></i> Friendly
+                                </div>
+                                <div class="tag-item" data-value="Professional">
+                                    <i class="fas fa-user-tie"></i> Professional
+                                </div>
+                                <div class="tag-item" data-value="Cinematic">
+                                    <i class="fas fa-film"></i> Cinematic
+                                </div>
+                                <div class="tag-item" data-value="Playful">
+                                    <i class="fas fa-gamepad"></i> Playful
+                                </div>
+                                <div class="tag-item" data-value="Motivational">
+                                    <i class="fas fa-bolt"></i> Motivational
+                                </div>
+                                <div class="tag-item" data-value="Calming">
+                                    <i class="fas fa-wind"></i> Calming
+                                </div>
+                                <div class="tag-item" data-value="Technical">
+                                    <i class="fas fa-code"></i> Technical
+                                </div>
+                                <div class="tag-item" data-value="Luxurious">
+                                    <i class="fas fa-gem"></i> Luxurious
+                                </div>
+                                <div class="tag-item" data-value="Minimalist">
+                                    <i class="fas fa-minus"></i> Minimalist
+                                </div>
+                                <div class="tag-item" data-value="Energetic">
+                                    <i class="fas fa-fire"></i> Energetic
+                                </div>
+                            </div>
+
+                            <div class="form-group mt-4">
+                                <label>Add Custom Tone</label>
+                                <div class="custom-field-add">
+                                    <input type="text" id="customTone" placeholder="Enter custom tone (e.g. Nostalgic)">
+                                    <button id="addCustomTone" class="btn-add">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- UI Flow Selection -->
+                    <section class="card card-clickable">
+                        <div class="card-header">
+                            <h2><i class="fas fa-mobile-alt"></i> UI Flow Selection</h2>
+                            <div class="card-toggle"><i class="fas fa-chevron-up"></i></div>
+                        </div>
+                        
+                        <div class="card-content">
+                            <p class="section-desc">Select a screen type for your UI mockup</p>
+                            
+                            <div class="flow-selector">
+                                <!-- Login Screen -->
+                                <div class="flow-item" data-screen="login">
+                                    <div class="flow-header">
+                                        <div class="flow-icon"><i class="fas fa-sign-in-alt"></i></div>
+                                        <div class="flow-title">Login</div>
+                                        <div class="flow-radio">
+                                            <input type="radio" id="loginScreen" name="screenType" class="screen-radio">
+                                            <label for="loginScreen"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Sign Up Screen -->
+                                <div class="flow-item" data-screen="signUp">
+                                    <div class="flow-header">
+                                        <div class="flow-icon"><i class="fas fa-user-plus"></i></div>
+                                        <div class="flow-title">Sign Up</div>
+                                        <div class="flow-radio">
+                                            <input type="radio" id="signUpScreen" name="screenType" class="screen-radio">
+                                            <label for="signUpScreen"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Onboarding Screen -->
+                                <div class="flow-item" data-screen="onboarding">
+                                    <div class="flow-header">
+                                        <div class="flow-icon"><i class="fas fa-paper-plane"></i></div>
+                                        <div class="flow-title">Onboarding</div>
+                                        <div class="flow-radio">
+                                            <input type="radio" id="onboardingScreen" name="screenType" class="screen-radio">
+                                            <label for="onboardingScreen"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Home Screen -->
+                                <div class="flow-item selected" data-screen="home">
+                                    <div class="flow-header">
+                                        <div class="flow-icon"><i class="fas fa-home"></i></div>
+                                        <div class="flow-title">Home</div>
+                                        <div class="flow-radio">
+                                            <input type="radio" id="homeScreen" name="screenType" class="screen-radio" checked>
+                                            <label for="homeScreen"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Profile Screen -->
+                                <div class="flow-item" data-screen="profile">
+                                    <div class="flow-header">
+                                        <div class="flow-icon"><i class="fas fa-user"></i></div>
+                                        <div class="flow-title">Profile</div>
+                                        <div class="flow-radio">
+                                            <input type="radio" id="profileScreen" name="screenType" class="screen-radio">
+                                            <label for="profileScreen"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Chat Screen -->
+                                <div class="flow-item" data-screen="chat">
+                                    <div class="flow-header">
+                                        <div class="flow-icon"><i class="fas fa-comments"></i></div>
+                                        <div class="flow-title">Chat</div>
+                                        <div class="flow-radio">
+                                            <input type="radio" id="chatScreen" name="screenType" class="screen-radio">
+                                            <label for="chatScreen"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Search Screen -->
+                                <div class="flow-item" data-screen="search">
+                                    <div class="flow-header">
+                                        <div class="flow-icon"><i class="fas fa-search"></i></div>
+                                        <div class="flow-title">Search</div>
+                                        <div class="flow-radio">
+                                            <input type="radio" id="searchScreen" name="screenType" class="screen-radio">
+                                            <label for="searchScreen"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Content View Screen -->
+                                <div class="flow-item" data-screen="contentView">
+                                    <div class="flow-header">
+                                        <div class="flow-icon"><i class="fas fa-file-alt"></i></div>
+                                        <div class="flow-title">Content View</div>
+                                        <div class="flow-radio">
+                                            <input type="radio" id="contentViewScreen" name="screenType" class="screen-radio">
+                                            <label for="contentViewScreen"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Checkout Screen -->
+                                <div class="flow-item" data-screen="checkout">
+                                    <div class="flow-header">
+                                        <div class="flow-icon"><i class="fas fa-shopping-cart"></i></div>
+                                        <div class="flow-title">Checkout</div>
+                                        <div class="flow-radio">
+                                            <input type="radio" id="checkoutScreen" name="screenType" class="screen-radio">
+                                            <label for="checkoutScreen"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Settings Screen -->
+                                <div class="flow-item" data-screen="settings">
+                                    <div class="flow-header">
+                                        <div class="flow-icon"><i class="fas fa-cog"></i></div>
+                                        <div class="flow-title">Settings</div>
+                                        <div class="flow-radio">
+                                            <input type="radio" id="settingsScreen" name="screenType" class="screen-radio">
+                                            <label for="settingsScreen"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Custom Screen -->
+                                <div class="flow-item" data-screen="custom">
+                                    <div class="flow-header">
+                                        <div class="flow-icon"><i class="fas fa-plus-square"></i></div>
+                                        <div class="flow-title">Custom</div>
+                                        <div class="flow-radio">
+                                            <input type="radio" id="customScreen" name="screenType" class="screen-radio">
+                                            <label for="customScreen"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Screen Options Container -->
+                            <div id="screen-options-container" class="screen-options-container">
+                                <div class="screen-options-header">
+                                    <h3>Configure Selected Screen</h3>
+                                    <div class="screen-options-actions">
+                                        <button id="addCustomOption" class="btn-add">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="screen-options-subheader">
+                                    <p class="drag-drop-hint"><i class="fas fa-arrows-alt"></i> Drag and drop to reorder elements</p>
+                                </div>
+                                <div id="screen-options-content" class="screen-options-content">
+                                    <div class="custom-option-form">
+                                        <input type="text" class="custom-option-input" placeholder="Enter custom feature (e.g. 'Profile Picture')">
+                                        <div class="custom-option-actions">
+                                            <button class="btn-icon save-custom-option"><i class="fas fa-check"></i></button>
+                                            <button class="btn-icon cancel-custom-option"><i class="fas fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="options-group" id="draggable-options-container">
+                                        <div class="option-row draggable" draggable="true" data-id="fab" data-screen="home">
+                                            <div class="drag-handle">
+                                                <i class="fas fa-grip-lines"></i>
+                                            </div>
+                                            <div class="option-checkbox">
+                                                <input type="checkbox" id="home-fab" class="screen-option-checkbox" checked>
+                                                <label for="home-fab"></label>
+                                            </div>
+                                            <div class="option-label">Include floating action button (FAB)</div>
+                                        </div>
+                                        
+                                        <div class="option-row draggable" draggable="true" data-id="cardLayout" data-screen="home">
+                                            <div class="drag-handle">
+                                                <i class="fas fa-grip-lines"></i>
+                                            </div>
+                                            <div class="option-checkbox">
+                                                <input type="checkbox" id="home-cardLayout" class="screen-option-checkbox" checked>
+                                                <label for="home-cardLayout"></label>
+                                            </div>
+                                            <div class="option-label">Use card layout</div>
+                                        </div>
+                                        
+                                        <div class="option-row draggable" draggable="true" data-id="listLayout" data-screen="home">
+                                            <div class="drag-handle">
+                                                <i class="fas fa-grip-lines"></i>
+                                            </div>
+                                            <div class="option-checkbox">
+                                                <input type="checkbox" id="home-listLayout" class="screen-option-checkbox">
+                                                <label for="home-listLayout"></label>
+                                            </div>
+                                            <div class="option-label">Use list layout</div>
+                                        </div>
+                                        
+                                        <div class="option-row draggable" draggable="true" data-id="searchBar" data-screen="home">
+                                            <div class="drag-handle">
+                                                <i class="fas fa-grip-lines"></i>
+                                            </div>
+                                            <div class="option-checkbox">
+                                                <input type="checkbox" id="home-searchBar" class="screen-option-checkbox">
+                                                <label for="home-searchBar"></label>
+                                            </div>
+                                            <div class="option-label">Include search bar</div>
+                                        </div>
+                                        
+                                        <div class="option-row draggable" draggable="true" data-id="bottomNav" data-screen="home">
+                                            <div class="drag-handle">
+                                                <i class="fas fa-grip-lines"></i>
+                                            </div>
+                                            <div class="option-checkbox">
+                                                <input type="checkbox" id="home-bottomNav" class="screen-option-checkbox" checked>
+                                                <label for="home-bottomNav"></label>
+                                            </div>
+                                            <div class="option-label">Include bottom navigation bar</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button id="reset-button" class="btn btn-secondary">
+                            <i class="fas fa-redo-alt"></i> Reset All
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Right column - Prompt Output -->
+                <div class="output-column">
+                    <section class="card">
+                        <div class="prompt-header">
+                            <h2>Generated Prompt</h2>
+                            <div class="prompt-actions">
+                                <button id="copy-button" class="btn btn-primary">
+                                    Copy
+                                </button>
+                                <button id="download-button" class="btn btn-outline">
+                                    Download
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="selected-features-container" class="selected-features-container">
+                            <h3>Your Selections</h3>
+                            <div id="selected-features-list" class="features-list">
+                                <div class="feature-badge primary" data-id="device">
+                                    <i class="fas fa-mobile-alt"></i> iPhone 15 Pro (1179 x 2556 px)
+                                </div>
+                                <div class="feature-badge primary" data-id="style">
+                                    <i class="fas fa-palette"></i> Dark Mode
+                                </div>
+                                <div class="feature-badge primary" data-id="screen">
+                                    <i class="fas fa-mobile-screen"></i> Home
+                                </div>
+                                <div class="feature-badge secondary" data-id="home-fab">
+                                    <i class="fas fa-check"></i> Include floating action button (FAB)
+                                </div>
+                                <div class="feature-badge secondary" data-id="home-cardLayout">
+                                    <i class="fas fa-check"></i> Use card layout
+                                </div>
+                                <div class="feature-badge secondary" data-id="home-bottomNav">
+                                    <i class="fas fa-check"></i> Include bottom navigation bar
+                                </div>
+                                <div class="feature-badge primary" data-id="category-Social">
+                                    <i class="fas fa-tag"></i> Social
+                                </div>
+                                <div class="feature-badge secondary" data-id="tone-Friendly">
+                                    <i class="fas fa-comment"></i> Friendly
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="prompt-output" class="prompt-output">Design a modern, clean mobile UI screen for an iOS-style app titled: "[APP NAME]"
+
+🖼️ Format & Resolution
+Output resolution: 1179 x 2556 pixels
+Device frame: Simulate a full iPhone 15 Pro screen
+Orientation: Portrait
+
+✅ Include the entire screen layout inside the visible area — top and bottom bars must be fully shown
+✅ Do not crop any part of the UI — all content should fit clearly inside the phone frame and be readable
+✅ Respect full safe area padding (status bar, navigation bar, and spacing around rounded corners)
+
+🎯 Visual Direction
+Theme: Dark Mode
+Color Palette: [Auto-generated or optional input]
+Typography: [Auto or selected style]
+Icon Style: [Line, Filled, Lottie-inspired, etc.]
+UI Density: [Compact, Balanced, Spacious]
+
+📲 Mobile UI Layout Structure
+Status Bar: iOS indicators (time, signal, battery)
+Header Section: [Layout, logo, greeting, profile image — if selected]
+Main Sections: [Based on screens selected]
+Bottom Navigation: Include bottom navigation with tabs and icons
+
+🧩 Included Screen: Home
+🧠 Selected Features: Include floating action button (FAB), Use card layout, Include bottom navigation bar
+
+✨ Final Note
+Render this UI in 1179 x 2556 px inside a full iPhone 15 Pro frame, in portrait.
+✅ No top/bottom UI cropping
+✅ Use a white background margin around the device to prevent cutoff.
+✅ Prioritize modern spacing, readable typography, and accessible UI practices.
+
+Target Audience: 18 to 35 year olds, [AUDIENCE DESCRIPTION]
+App Categories: Social
+Tone of Voice: Friendly</div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Drag and drop option template -->
+    <template id="draggable-option-template">
+        <div class="option-row draggable" draggable="true">
+            <div class="drag-handle">
+                <i class="fas fa-grip-lines"></i>
+            </div>
+            <div class="option-checkbox">
+                <input type="checkbox" class="screen-option-checkbox">
+                <label></label>
+            </div>
+            <div class="option-label"></div>
+            <div class="option-actions">
+                <button class="btn-icon delete-option"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+    </template>
+    
+    <!-- Custom option input template -->
+    <template id="custom-option-template">
+        <div class="custom-option-form">
+            <input type="text" class="custom-option-input" placeholder="Enter custom feature (e.g. 'Profile Picture')">
+            <div class="custom-option-actions">
+                <button class="btn-icon save-custom-option"><i class="fas fa-check"></i></button>
+                <button class="btn-icon cancel-custom-option"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>
